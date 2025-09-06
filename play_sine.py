@@ -10,15 +10,9 @@ import sounddevice as sd
 import shared
 
 
-def int_or_str(text):
-    """Helper function for argument parsing."""
-    try:
-        return int(text)
-    except ValueError:
-        return text
 
-base_freq = 400
-base_amplitude = 0
+base_freq = 200
+max_amplitude = 0.5
 start_idx = 0
 phase = 0.0
 
@@ -30,9 +24,10 @@ def generate_audio():
 
             nonlocal samplerate
             global base_freq, phase
-            if shared.location != (0,0):
-                freq = base_freq# + (shared.location[0] * 100) - 50
-                amplitude = base_amplitude + shared.distance#(shared.location[1] * 0.1)
+            if shared.tracking:
+                freq = base_freq + shared.distance_between_hands*100
+                amplitude = max_amplitude * shared.distance_between_hands
+                print(shared.distance_between_hands)
             else:
                 freq = base_freq
                 amplitude = 0
@@ -62,3 +57,7 @@ def generate_audio():
         parser.exit('')
     except Exception as e:
         parser.exit(type(e).__name__ + ': ' + str(e))
+
+if __name__ == '__main__':
+    shared.tracking=True
+    generate_audio()
