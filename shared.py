@@ -24,6 +24,12 @@ def measure_total_distances(points:list[tuple]):
 def center_of_two_points(point1:tuple, point2:tuple):
     return ((point1[0] + point2[0]) / 2, (point1[1] + point2[1]) / 2, (point1[2] + point2[2]) / 2)
 
+def scale_value_to_range(value, src_min, src_max):
+    # Scale value from src range to [0, 1]
+    scaled = (value - src_min) / (src_max - src_min)
+    # Clamp to [0, 1]
+    return max(0, min(1, scaled))
+
 def angle_between_points(point1:tuple, point2:tuple, point3:tuple):
     import numpy as np
     a = np.array([point1[0], point1[1], point1[2]])
