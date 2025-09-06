@@ -57,8 +57,8 @@ def play_wav():
             
 
             if tail >= frames:
-                combined_data = (gmajor_data[current_frame:current_frame + frames] * left_hand_amplitude +
-                                 emajor_data[current_frame:current_frame + frames] * right_hand_amplitude)
+                combined_data = (gmajor_data[current_frame:current_frame + frames] * right_hand_amplitude +
+                                 emajor_data[current_frame:current_frame + frames] * left_hand_amplitude)
                 outdata[:] = combined_data
                 
                 current_frame += frames
