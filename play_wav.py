@@ -50,13 +50,17 @@ def play_wav():
                 print(status)   # keep if you need diagnostics
             frames = int(frames)
             tail = len(data) - current_frame
+
+            amplitude = max(0,shared.distance_between_hands-0.2)*1.25 if shared.tracking else 0
+            print(amplitude)
+
             if tail >= frames:
-                outdata[:] = data[current_frame:current_frame + frames] * shared.distance_between_hands
-                print(shared.distance_between_hands)
+                outdata[:] = data[current_frame:current_frame + frames] * amplitude
+                
                 current_frame += frames
             else:
-                outdata[:tail] = data[current_frame:]
-                outdata[tail:frames] = data[:frames - tail]
+                outdata[:tail] = data[current_frame:] * amplitude
+                outdata[tail:frames] = data[:frames - tail] * amplitude
                 current_frame = frames - tail
             # keep current_frame in range
             if current_frame >= len(data):
