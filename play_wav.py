@@ -40,8 +40,8 @@ def play_wav():
 
     runs = 0
     try:
-        gmajor_data, gmajor_fs = sf.read("audio/gmajor.wav", always_2d=True)
-        emajor_data, emajor_fs = sf.read("audio/emajor.wav", always_2d=True)
+        gmajor_data, gmajor_fs = sf.read("audio/Gmajor.wav", always_2d=True)
+        emajor_data, emajor_fs = sf.read("audio/Emajor.wav", always_2d=True)
         global current_frame
         current_frame = 0
 
