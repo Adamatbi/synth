@@ -4,7 +4,7 @@ import shared
 
 def track_body():
     mp_pose = mp.solutions.pose
-    pose = mp_pose.Pose(min_detection_confidence=0.5, min_tracking_confidence=0.5)
+    pose = mp_pose.Pose(min_detection_confidence=0.8, min_tracking_confidence=0.5)
     mp_drawing = mp.solutions.drawing_utils
     mp_drawing_styles = mp.solutions.drawing_styles
 
@@ -26,10 +26,13 @@ def track_body():
                 mp_pose.POSE_CONNECTIONS,
                 landmark_drawing_spec=mp_drawing_styles.get_default_pose_landmarks_style()
             )
-            shared.measure_distance_between_hands(results)
-            shared.measure_hand_heights(results)
-            set_values = True
-            shared.tracking=True
+            if shared.fully_visible(results):
+                shared.measure_distance_between_hands(results)
+                shared.measure_horizontal_distance_between_hands(results)
+                shared.measure_hand_heights(results)
+                shared.measure_right_hand_speed(results)
+                set_values = True
+                shared.tracking=True
 
 
         cv2.imshow("Pose", frame)
