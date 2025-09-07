@@ -60,7 +60,12 @@ def angle_between_points(point1:tuple, point2:tuple, point3:tuple):
     return np.degrees(angle)
 
 def fully_visible(results):
-    for landmark in results.pose_landmarks.landmark:
+    for index,landmark in enumerate(results.pose_landmarks.landmark):
+
+        # only check key landmarks from head to hips
+        if index > mp.solutions.pose.PoseLandmark.RIGHT_HIP.value:
+            break
+
         if landmark.x < 0 or landmark.x > 1 or landmark.y < 0 or landmark.y > 1:
             return False
     return True

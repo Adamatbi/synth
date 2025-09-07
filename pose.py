@@ -4,7 +4,7 @@ import shared
 
 def track_body():
     mp_pose = mp.solutions.pose
-    pose = mp_pose.Pose(min_detection_confidence=0.8, min_tracking_confidence=0.5)
+    pose = mp_pose.Pose(min_detection_confidence=0.9, min_tracking_confidence=0.9)
     mp_drawing = mp.solutions.drawing_utils
     mp_drawing_styles = mp.solutions.drawing_styles
 
